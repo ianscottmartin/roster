@@ -1,0 +1,65 @@
+/* General Styles */
+.day {
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    display: inline-block;
+    width: 13%;
+    vertical-align: top;
+    box-sizing: border-box;
+}
+
+
+.person {
+    padding: 5px;
+    margin: 2px 0;
+    border-radius: 4px;
+    color: #fff;
+    /* Text color for visibility */
+    font-size: 14px;
+}
+
+
+.highlight {
+    font-weight: bold;
+}
+
+
+.preferred {
+    background-color: #ffefc4;
+    /* Light highlight for preferred days */
+}
+
+
+/* Shift Type Colors */
+.frontHalfShift {
+    background-color: #cfe2f3;
+    /* Light Blue */
+    color: #003a70;
+    /* Dark Blue */
+}
+
+
+.backHalfShift {
+    background-color: #e3f2fd;
+    /* Light Cyan */
+    color: #0277bd;
+    /* Dark Cyan */
+}
+
+
+.donutShift {
+    background-color: #fce4ec;
+    /* Light Pink */
+    color: #d81b60;
+    /* Dark Pink */
+}
+
+
+.waterfallShift {
+    background-color: #e8f5e9;
+    /* Light Green */
+    color: #2e7d32;
+    /* Dark Green */
+}
