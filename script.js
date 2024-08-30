@@ -3,7 +3,7 @@ const frontHalfShift = [
   {
     name: 'Tylerlof',
     days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday'],
-    preferredDays: ['Sunday'],
+    preferredDays: ['Sunday', 'Monday', 'Wednesday'],
     unavailableDays: ['Wednesday']
   },
   {
@@ -15,14 +15,14 @@ const frontHalfShift = [
   {
     name: 'Qgarciph',
     days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday'],
-    preferredDays: ['Tuesday'],
-    unavailableDays: ['Sunday', 'Wednesday']
+    preferredDays: ['Sunday', 'Wednesday'],
+    unavailableDays: ['Monday']
   },
   {
     name: 'Rogernew',
     days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday'],
-    preferredDays: [],
-    unavailableDays: ['Sunday', 'Tuesday']
+    preferredDays: ['Sunday', 'Tuesday'],
+    unavailableDays: []
   },
   {
     name: 'Abbymmca',
@@ -31,7 +31,7 @@ const frontHalfShift = [
     unavailableDays: ['Sunday', 'Monday', 'Wednesday']
   },
   {
-    name: 'uttwilla',
+    name: 'Uttwilla',
     days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday'],
     preferredDays: [],
     unavailableDays: ['Sunday', 'Monday', 'Tuesday', 'Wednesday']
@@ -45,8 +45,8 @@ const frontHalfShift = [
   {
     name: 'Zafenner',
     days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday'],
-    preferredDays: [],
-    unavailableDays: ['Sunday', 'Tuesday']
+    preferredDays: ['Sunday', 'Tuesday'],
+    unavailableDays: ['Monday']
   },
   {
     name: 'Esstve',
@@ -114,7 +114,7 @@ const backHalfShift = [
   {
     name: 'Hstanwhi',
     days: ['Wednesday', 'Thursday', 'Friday', 'Saturday'],
-    preferredDays: [],
+    preferredDays: ['Thursday', 'Saturday'],
     unavailableDays: []
   },
   {
@@ -136,7 +136,7 @@ const backHalfShift = [
     unavailableDays: []
   },
   {
-    name: 'hetzejas',
+    name: 'Hetzejas',
     days: ['Wednesday', 'Thursday', 'Friday', 'Saturday'],
     preferredDays: [],
     unavailableDays: []
@@ -308,36 +308,55 @@ function getColorForShift(shift) {
   }
 }
 
+// Shuffle an array
+function shuffleArray(array) {
+  let currentIndex = array.length,
+    randomIndex;
+  while (currentIndex !== 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex],
+      array[currentIndex]
+    ];
+  }
+  return array;
+}
+
 function assignDaysToShifts() {
   // Clear previous schedule
   Object.keys(schedule).forEach((day) => (schedule[day] = []));
 
   // Flatten all shifts
   const allPeople = Object.keys(shifts).flatMap((shiftKey) => shifts[shiftKey]);
-  console.log('All People:', allPeople); // Debugging output
 
   // Iterate over each day and assign people
   Object.keys(schedule).forEach((day) => {
-    // Filter people available for the day and not marked as unavailable
     const availablePeople = allPeople.filter(
       (person) =>
         person.days.includes(day) &&
         (!person.unavailableDays || !person.unavailableDays.includes(day))
     );
 
-    // Shuffle availablePeople to ensure random assignment
-    const shuffledPeople = shuffleArray(availablePeople);
+    // Sort people with preferences first
+    const preferredFirst = availablePeople.sort((a, b) => {
+      if (a.preferredDays.includes(day) && !b.preferredDays.includes(day))
+        return -1;
+      if (!a.preferredDays.includes(day) && b.preferredDays.includes(day))
+        return 1;
+      return 0;
+    });
+
+    // Shuffle remaining people to ensure random assignment
+    const shuffledPeople = shuffleArray(preferredFirst);
 
     // Add people to the schedule ensuring a maximum of 14 per day
     shuffledPeople.forEach((person) => {
       if (schedule[day].length < 14) {
-        console.log(`Adding ${person.name} to ${day}`); // Debugging output
         schedule[day].push({
           name: person.name,
           shift: getShiftForPerson(person),
-          preferred: person.preferredDays
-            ? person.preferredDays.includes(day)
-            : false
+          preferred: person.preferredDays.includes(day)
         });
       }
     });
@@ -359,14 +378,13 @@ function assignDaysToShifts() {
     });
   });
 
-  // Debugging output
-  console.log('Final Schedule:', schedule);
+  // Display the schedule
+  displaySchedule();
 }
 
 function getShiftForPerson(person) {
   for (const shiftKey in shifts) {
     if (shifts[shiftKey].some((p) => p.name === person.name)) {
-      console.log(`Shift for ${person.name}: ${shiftKey}`); // Debugging output
       return shiftKey;
     }
   }
@@ -383,7 +401,6 @@ function displaySchedule() {
     dayElement.innerHTML = `<h3>${day}</h3>`;
 
     schedule[day].forEach((person) => {
-      console.log(`Displaying ${person.name} for ${day} (${person.shift})`); // Debugging output
       const personElement = document.createElement('div');
       personElement.className = `person ${getColorForShift(person.shift)} ${
         person.highlight ? 'highlight' : ''
@@ -396,21 +413,5 @@ function displaySchedule() {
   });
 }
 
-// Utility function to shuffle an array
-function shuffleArray(array) {
-  let currentIndex = array.length,
-    randomIndex;
-  while (currentIndex !== 0) {
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
-    [array[currentIndex], array[randomIndex]] = [
-      array[randomIndex],
-      array[currentIndex]
-    ];
-  }
-  return array;
-}
-
 // Initialize the schedule and display it
 assignDaysToShifts();
-displaySchedule();
