@@ -93,7 +93,7 @@
 
 
 .preferred {
-    background-color: #63a2af;
+    background-color: #ca5136;
     /* Light highlight for preferred days */
 }
 
@@ -110,7 +110,7 @@
 .backHalfShift {
     background-color: #17cb50;
     /* Light Cyan */
-    color: #0277bd;
+    color: #090a0b;
     /* Dark Cyan */
 }
 
@@ -118,7 +118,7 @@
 .donutShift {
     background-color: #c4d639;
     /* Light Pink */
-    color: #210bb5;
+    color: #09080d;
     /* Dark Pink */
 }
 
