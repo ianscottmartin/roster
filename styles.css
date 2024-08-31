@@ -10,122 +10,75 @@
     box-sizing: border-box;
 }
 
-
+/* Person Styles */
 .person {
     padding: 5px;
     margin: 2px 0;
     border-radius: 4px;
     color: #fff;
-    /* Text color for visibility */
     font-size: 14px;
 }
 
-
+/* Highlight and Preferences */
 .highlight {
     font-weight: bold;
 }
 
-
 .preferred {
-    background-color: #ffefc4;
-    /* Light highlight for preferred days */
+    background-color: #eb7515;
 }
-
 
 /* Shift Type Colors */
 .frontHalfShift {
-    background-color: #cfe2f3;
-    /* Light Blue */
-    color: #003a70;
-    /* Dark Blue */
+    background-color: #583ddd;
+    color: #04080b;
 }
-
-
-.backHalfShift {
-    background-color: #e3f2fd;
-    /* Light Cyan */
-    color: #0277bd;
-    /* Dark Cyan */
-}
-
-
-.donutShift {
-    background-color: #ea95b1;
-    /* Light Pink */
-    color: #d81b60;
-    /* Dark Pink */
-}
-
-
-.waterfallShift {
-    background-color: #043f09;
-    /* Light Green */
-    color: #2e7d32;
-    /* Dark Green */
-}
-
-/* General Styles */
-.day {
-    margin: 10px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    display: inline-block;
-    width: 13%;
-    vertical-align: top;
-    box-sizing: border-box;
-}
-
-
-.person {
-    padding: 5px;
-    margin: 2px 0;
-    border-radius: 4px;
-    color: #b0283e;
-    /* Text color for visibility */
-    font-size: 14px;
-}
-
-
-.highlight {
-    font-weight: bold;
-}
-
-
-.preferred {
-    background-color: #ca5136;
-    /* Light highlight for preferred days */
-}
-
-
-/* Shift Type Colors */
-.frontHalfShift {
-    background-color: #0d84ec;
-    /* Light Blue */
-    color: black;
-    /* Dark Blue */
-}
-
 
 .backHalfShift {
     background-color: #17cb50;
-    /* Light Cyan */
-    color: #090a0b;
-    /* Dark Cyan */
+    color: #0f0f0f;
 }
-
 
 .donutShift {
-    background-color: #c4d639;
-    /* Light Pink */
-    color: #09080d;
-    /* Dark Pink */
+    background-color: #ba471d;
+    color: black;
 }
 
-
 .waterfallShift {
-    background-color: #098a14;
-    /* Light Green */
-    color: #040404;
-    /* Dark Green */
+    background-color: #077410;
+    color: #030303;
+}
+
+/* Responsive Design */
+#schedule {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+@media (max-width: 1200px) {
+    .day {
+        width: 30%;
+        /* 3 per row */
+    }
+}
+
+@media (max-width: 768px) {
+    .day {
+        width: 45%;
+        /* 2 per row */
+    }
+}
+
+@media (max-width: 480px) {
+    .day {
+        width: 95%;
+        /* 1 per row */
+    }
+
+    .person {
+        font-size: 12px;
+        /* Slightly smaller text for small screens */
+    }
 }
