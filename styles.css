@@ -82,3 +82,9 @@
         /* Slightly smaller text for small screens */
     }
 }
+
+.highlight {
+    background-color: #f39c12;
+    /* Yellowish highlight color */
+    color: white;
+}

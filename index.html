@@ -8,10 +8,33 @@
 </head>
 <body>
    <h1>Weekly Schedule</h1>
+   <button id="generateBtn">Generate Schedule</button>
+   <!-- New button to ignore preferred days -->
+<button id="ignorePreferredDaysBtn">Generate Schedule (Ignore Preferred Days)</button>
+<!-- New button to remove people with no availability -->
+<div id="personList">
+  <!-- Example person list -->
+  <div class="person">
+    <input type="checkbox" class="removePersonCheckbox" id="person1">
+    <label for="person1">John Doe</label>
+  </div>
+  <div class="person">
+    <input type="checkbox" class="removePersonCheckbox" id="person2">
+    <label for="person2">Jane Smith</label>
+  </div>
+  <!-- Add more people as needed -->
+</div>
+<div id="personList">
+  <!-- Dynamically generated list of people will go here -->
+</div>
+<!-- Button to remove selected people -->
+<button id="removeSelectedBtn">Remove Selected People</button>
+
    <div id="schedule"></div>
    <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
