@@ -118,7 +118,7 @@ const backHalfShift = [
     unavailableDays: []
   },
   {
-    name: 'John',
+    name: 'Jonathon',
     days: ['Wednesday', 'Thursday', 'Friday', 'Saturday'],
     preferredDays: [],
     unavailableDays: []
@@ -276,7 +276,7 @@ const waterfallShift = [
     unavailableDays: []
   },
   {
-    name: 'David',
+    name: 'David 1',
     days: ['Thursday', 'Friday', 'Saturday', 'Sunday'],
     preferredDays: [],
     unavailableDays: ['Thursday', 'Friday', 'Saturday', 'Sunday']
@@ -376,7 +376,7 @@ function assignDaysToShifts() {
     // Shuffle remaining people to ensure random assignment
     const shuffledPeople = shuffleArray(preferredFirst);
 
-    // Add people to the schedule ensuring a maximum of 16 per day
+    // Add people to the schedule ensuring a maximum of 14 or 16 later per day
     shuffledPeople.forEach((person) => {
       if (schedule[day].length < 16) {
         schedule[day].push({
@@ -398,7 +398,7 @@ function assignDaysToShifts() {
 
   Object.keys(schedule).forEach((day) => {
     schedule[day].forEach((person) => {
-      if (personDayCount[person.name] > 2) {
+      if (personDayCount[person.name] > 4) {
         person.highlight = true;
       }
     });
