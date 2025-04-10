@@ -1,3 +1,11 @@
+const DAYS = {
+  frontHalf: ['Sunday', 'Monday', 'Tuesday', 'Wednesday'],
+  backHalf: ['Wednesday', 'Thursday', 'Friday', 'Saturday'],
+  donut: ['Monday', 'Tuesday', 'Thursday', 'Friday'],
+  waterfall1: ['Sunday', 'Monday', 'Tuesday', 'Saturday'],
+  waterfall2: ['Thursday', 'Friday', 'Saturday', 'Sunday']
+};
+
 // Define shift data with preferences and availability
 const frontHalfShift = [
   {
@@ -241,7 +249,7 @@ const waterfallShift = [
     name: 'Jeff',
     days: ['Sunday', 'Monday', 'Tuesday', 'Saturday'],
     preferredDays: [],
-    unavailableDays: ['Sunday', 'Monday', 'Tuesday', 'Saturday']
+    unavailableDays: ['Monday', 'Tuesday', 'Saturday']
   },
 
   {
@@ -398,7 +406,7 @@ function assignDaysToShifts() {
 
   Object.keys(schedule).forEach((day) => {
     schedule[day].forEach((person) => {
-      if (personDayCount[person.name] > 4) {
+      if (personDayCount[person.name] > 2) {
         person.highlight = true;
       }
     });
@@ -1015,114 +1023,114 @@ document.addEventListener('DOMContentLoaded', () => {
 //   });
 // }
 
-// // Function to assign people to shifts (as before)
-// function assignDaysToShifts(ignorePreferredDays = false) {
-//   // Clear previous schedule
-//   Object.keys(schedule).forEach((day) => (schedule[day] = []));
+// Function to assign people to shifts (as before)
+function assignDaysToShifts(ignorePreferredDays = false) {
+  // Clear previous schedule
+  Object.keys(schedule).forEach((day) => (schedule[day] = []));
 
-//   // Flatten all shifts
-//   const allPeople = Object.keys(shifts).flatMap((shiftKey) => shifts[shiftKey]);
+  // Flatten all shifts
+  const allPeople = Object.keys(shifts).flatMap((shiftKey) => shifts[shiftKey]);
 
-//   // Iterate over each day and assign people
-//   Object.keys(schedule).forEach((day) => {
-//     const availablePeople = allPeople.filter(
-//       (person) =>
-//         person.days.includes(day) &&
-//         (!person.unavailableDays || !person.unavailableDays.includes(day))
-//     );
+  //   // Iterate over each day and assign people
+  Object.keys(schedule).forEach((day) => {
+    const availablePeople = allPeople.filter(
+      (person) =>
+        person.days.includes(day) &&
+        (!person.unavailableDays || !person.unavailableDays.includes(day))
+    );
 
-//     let sortedPeople;
+    let sortedPeople;
 
-//     // Sort people with preferences if we are NOT ignoring preferred days
-//     if (ignorePreferredDays) {
-//       // Shuffle people to ensure random assignment (ignoring preferences)
-//       sortedPeople = shuffleArray(availablePeople);
-//     } else {
-//       // Sort people with preferences first
-//       const preferredFirst = availablePeople.sort((a, b) => {
-//         if (a.preferredDays.includes(day) && !b.preferredDays.includes(day))
-//           return -1;
-//         if (!a.preferredDays.includes(day) && b.preferredDays.includes(day))
-//           return 1;
-//         return 0;
-//       });
+    // Sort people with preferences if we are NOT ignoring preferred days
+    if (ignorePreferredDays) {
+      // Shuffle people to ensure random assignment (ignoring preferences)
+      sortedPeople = shuffleArray(availablePeople);
+    } else {
+      // Sort people with preferences first
+      const preferredFirst = availablePeople.sort((a, b) => {
+        if (a.preferredDays.includes(day) && !b.preferredDays.includes(day))
+          return -1;
+        if (!a.preferredDays.includes(day) && b.preferredDays.includes(day))
+          return 1;
+        return 0;
+      });
 
-//       // Shuffle remaining people to ensure random assignment
-//       sortedPeople = shuffleArray(preferredFirst);
-//     }
+      // Shuffle remaining people to ensure random assignment
+      sortedPeople = shuffleArray(preferredFirst);
+    }
 
-//     // Add people to the schedule ensuring a maximum of 16 per day
-//     sortedPeople.forEach((person) => {
-//       if (schedule[day].length < 16) {
-//         schedule[day].push({
-//           name: person.name,
-//           shift: getShiftForPerson(person),
-//           preferred: person.preferredDays.includes(day)
-//         });
-//       }
-//     });
-//   });
+    //     // Add people to the schedule ensuring a maximum of 16 per day
+    sortedPeople.forEach((person) => {
+      if (schedule[day].length < 16) {
+        schedule[day].push({
+          name: person.name,
+          shift: getShiftForPerson(person),
+          preferred: person.preferredDays.includes(day)
+        });
+      }
+    });
+  });
 
-//   // Highlight people scheduled more than 2 days
-//   const personDayCount = {};
-//   Object.values(schedule)
-//     .flat()
-//     .forEach((p) => {
-//       personDayCount[p.name] = (personDayCount[p.name] || 0) + 1;
-//     });
+  // Highlight people scheduled more than 2 days
+  const personDayCount = {};
+  Object.values(schedule)
+    .flat()
+    .forEach((p) => {
+      personDayCount[p.name] = (personDayCount[p.name] || 0) + 1;
+    });
 
-//   Object.keys(schedule).forEach((day) => {
-//     schedule[day].forEach((person) => {
-//       if (personDayCount[person.name] > 2) {
-//         person.highlight = true;
-//       }
-//     });
-//   });
+  Object.keys(schedule).forEach((day) => {
+    schedule[day].forEach((person) => {
+      if (personDayCount[person.name] > 2) {
+        person.highlight = true;
+      }
+    });
+  });
 
-//   // Display the schedule (this needs to be implemented separately)
-//   displaySchedule();
-// }
-// // Highlight people scheduled more than 2 days
-// const personDayCount = {};
-// Object.values(schedule)
-//   .flat()
-//   .forEach((p) => {
-//     personDayCount[p.name] = (personDayCount[p.name] || 0) + 1;
-//   });
+  // Display the schedule (this needs to be implemented separately)
+  displaySchedule();
+}
+// Highlight people scheduled more than 2 days
+const personDayCount = {};
+Object.values(schedule)
+  .flat()
+  .forEach((p) => {
+    personDayCount[p.name] = (personDayCount[p.name] || 0) + 1;
+  });
 
-// Object.keys(schedule).forEach((day) => {
-//   schedule[day].forEach((person) => {
-//     if (personDayCount[person.name] > 2) {
-//       person.highlight = true; // Mark person as highlighted
-//     }
-//   });
-// });
+Object.keys(schedule).forEach((day) => {
+  schedule[day].forEach((person) => {
+    if (personDayCount[person.name] > 2) {
+      person.highlight = true; // Mark person as highlighted
+    }
+  });
+});
 
-// // Apply highlight class in the DOM
-// function applyHighlights() {
-//   // Go through all people and apply a highlight if needed
-//   Object.keys(schedule).forEach((day) => {
-//     schedule[day].forEach((person) => {
-//       const personElement = document.querySelector(`#person-${person.name}`);
-//       if (person.highlight) {
-//         personElement.classList.add('highlight'); // Add highlight class
-//       } else {
-//         personElement.classList.remove('highlight'); // Remove highlight if no longer needed
-//       }
-//     });
-//   });
-// }
+// Apply highlight class in the DOM
+function applyHighlights() {
+  // Go through all people and apply a highlight if needed
+  Object.keys(schedule).forEach((day) => {
+    schedule[day].forEach((person) => {
+      const personElement = document.querySelector(`#person-${person.name}`);
+      if (person.highlight) {
+        personElement.classList.add('highlight'); // Add highlight class
+      } else {
+        personElement.classList.remove('highlight'); // Remove highlight if no longer needed
+      }
+    });
+  });
+}
 
-// // Call applyHighlights after schedule update
-// applyHighlights();
+// Call applyHighlights after schedule update
+applyHighlights();
 
-// // Display the schedule
-// displaySchedule();
-// // Combine all shifts into one array for easy iteration
-// const allShifts = [frontHalfShift, backHalfShift, donutShift, waterFallShift];
+// Display the schedule
+displaySchedule();
+// Combine all shifts into one array for easy iteration
+const allShifts = [frontHalfShift, backHalfShift, donutShift, waterFallShift];
 
-// // Get the container where the list of people will be displayed
-// const personListContainer = document.getElementById('personList');
+// Get the container where the list of people will be displayed
+const personListContainer = document.getElementById('personList');
 
 // // Function to populate the remove section with names and checkboxes
 // function populateRemoveSection() {
