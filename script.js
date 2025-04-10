@@ -9,12 +9,6 @@ const DAYS = {
 // Define shift data with preferences and availability
 const frontHalfShift = [
   {
-    name: 'Lissette',
-    days: ['Sunday', 'Monday', 'Tuesday', 'Saturday'],
-    preferredDays: [],
-    unavailableDays: ['Saturday']
-  },
-  {
     name: 'Phil',
     days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday'],
     preferredDays: ['Sunday', 'Tuesday'],
@@ -35,7 +29,7 @@ const frontHalfShift = [
   {
     name: 'Cordel',
     days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday'],
-    preferredDays: ['Sunday', 'Tuesday'],
+    preferredDays: ['Sunday', 'Monday', 'Tuesday'],
     unavailableDays: []
   },
   {
@@ -120,7 +114,7 @@ const backHalfShift = [
     unavailableDays: ['Wednesday', 'Thursday', 'Friday', 'Saturday']
   },
   {
-    name: 'Areyanna',
+    name: 'Arey anna',
     days: ['Wednesday', 'Thursday', 'Friday', 'Saturday'],
     preferredDays: [],
     unavailableDays: []
@@ -249,9 +243,14 @@ const waterfallShift = [
     name: 'Jeff',
     days: ['Sunday', 'Monday', 'Tuesday', 'Saturday'],
     preferredDays: [],
-    unavailableDays: ['Monday', 'Tuesday', 'Saturday']
+    unavailableDays: ['Sunday', 'Monday', 'Tuesday', 'Saturday']
   },
-
+  {
+    name: 'Lissette',
+    days: ['Sunday', 'Monday', 'Tuesday', 'Saturday'],
+    preferredDays: [],
+    unavailableDays: ['Saturday']
+  },
   {
     name: 'Anthony',
     days: ['Sunday', 'Monday', 'Tuesday', 'Saturday'],
@@ -926,12 +925,12 @@ document.addEventListener('DOMContentLoaded', () => {
 //       name: 'Alice',
 //       days: ['Monday', 'Tuesday', 'Wednesday'],
 //       preferredDays: ['Monday'],
-//       unavailableDays: ['Tuesday']
+//       unavailableDays: []
 //     },
 //     {
 //       name: 'Willsouc',
-//       days: ['Monday', 'Tuesday'],
-//       preferredDays: ['Tuesday'],
+//       days: ['Monday', 'Tuesday', 'Thursday', 'Friday'],
+//       preferredDays: [],
 //       unavailableDays: []
 //     }
 //   ];
