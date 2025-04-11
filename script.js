@@ -790,10 +790,10 @@ document.addEventListener('DOMContentLoaded', () => {
 // document.addEventListener('DOMContentLoaded', () => {
 //   // Example list of people
 //   const people = [
-//     { id: 'person1', name: 'Jeff Gibson' },
-//     { id: 'person2', name: 'Jane Smith' },
-//     { id: 'person3', name: 'Mark Johnson' },
-//     { id: 'person4', name: 'Emily Davis' }
+//     { id: 'person1', name: 'Jeff' },
+//     { id: 'person2', name: 'Jane' },
+//     { id: 'person3', name: 'Mark' },
+//     { id: 'person4', name: 'George' }
 //   ];
 
 //   // Get the container where the list will be displayed
@@ -846,7 +846,7 @@ document.addEventListener('DOMContentLoaded', () => {
 //   // Example list of people with the structure you've provided
 //   const people = [
 //     {
-//       name: 'Gibsonaj',
+//       name: 'Jeff',
 //       days: ['Thursday', 'Friday', 'Saturday', 'Sunday'],
 //       preferredDays: [],
 //       unavailableDays: []
@@ -916,7 +916,7 @@ document.addEventListener('DOMContentLoaded', () => {
 //   // Example list of people
 //   const people = [
 //     {
-//       name: 'Gibsonaj',
+//       name: 'Jeff',
 //       days: ['Thursday', 'Friday', 'Saturday', 'Sunday'],
 //       preferredDays: [],
 //       unavailableDays: []
@@ -928,7 +928,7 @@ document.addEventListener('DOMContentLoaded', () => {
 //       unavailableDays: []
 //     },
 //     {
-//       name: 'Willsouc',
+//       name: 'Will',
 //       days: ['Monday', 'Tuesday', 'Thursday', 'Friday'],
 //       preferredDays: [],
 //       unavailableDays: []
